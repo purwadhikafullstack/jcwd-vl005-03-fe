@@ -69,7 +69,7 @@ export default function Register() {
           duration: 3000,
           isClosable: true,
         })
-        navigate(`/verification`)
+        navigate(`/login`)
       })
   }
 
@@ -125,7 +125,7 @@ export default function Register() {
             <FormControl id="re_password" isRequired>
               <FormLabel>Repeat Password</FormLabel>
               <InputGroup>
-                <Input type={showRePassword ? 'text' : 're_password'} onChange={handleChange('re_password')} />
+                <Input type={showRePassword ? 'text' : 'password'} onChange={handleChange('re_password')} />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}

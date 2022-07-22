@@ -16,6 +16,9 @@ import { GET_ADMIN_DATA } from './redux/actions/types'
 import Home from "./pages/user/Home";
 import Products from "./pages/user/Products";
 import DetailProductUser from "./pages/user/DetailProductUser";
+import UserLogin from './pages/user/Login';
+import UserRegister from './pages/user/Register';
+import AboutUs from './pages/user/About';
 
 
 function App() {
@@ -42,6 +45,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/register" element={<UserRegister />}/>
+        <Route path="/login" element={<UserLogin/>}/>
+        <Route path="/about" element={<AboutUs/>}/>
         <Route path="/detail-product/:id" element={<DetailProductUser />} />
         <Route path="/admin" element={<HomeAdmin />} />
         <Route path="/admin/login" element={<Login />} />

@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { LOADING_END, LOADING_START } from '../../redux/actions/types';
 
-const API_URL = process.env.REACT_API_URL
+const API_URL = process.env.REACT_APP_API_URL
 
 export default function UserLogin() {
   const navigate = useNavigate()
@@ -47,11 +47,10 @@ export default function UserLogin() {
     console.log(`api url:`, API_URL)
 
     dispatch({ type: LOADING_START })
-    await Axios.post('http://localhost:5000/api/users', bodyOnSignIn)
+    await Axios.post(API_URL + '/users', bodyOnSignIn)
       .then((resp) => {
         console.log(resp)
-        const arr = resp.data.token.split(" ")
-        const token = arr[1]
+        const token = resp.data.token
         localStorage.setItem("token", token)
         if (!keepLogin[0].checked) {
           localStorage.setItem("keepLogin", 'false')
@@ -75,7 +74,7 @@ export default function UserLogin() {
         if (err) {
           return toast({
             title: `Error`,
-            description: err.response.data,
+            description: err.response.data.data,
             status: 'error',
             duration: 5000,
             isClosable: true,
@@ -105,7 +104,7 @@ export default function UserLogin() {
           boxShadow={'lg'}>
           <Stack spacing={4}>
             <FormControl isRequired id="email">
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>Username/Email address</FormLabel>
               <Input type="email" onChange={handleChange('email')} />
             </FormControl>
             <FormControl isRequired id="password">
@@ -118,7 +117,7 @@ export default function UserLogin() {
                 align={'start'}
                 justify={'space-between'}>
                 <Checkbox type={'checkbox'} name="keep">Remember me</Checkbox>
-                <Link color={'blue.400'}>Forgot password?</Link>
+                <Link href='/forgot-password' color={'blue.400'}>Forgot password?</Link>
               </Stack>
               <Button
                 onClick={onBtnLogin}

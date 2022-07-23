@@ -16,21 +16,35 @@ import { GET_ADMIN_DATA } from './redux/actions/types'
 import Home from "./pages/user/Home";
 import Products from "./pages/user/Products";
 import DetailProductUser from "./pages/user/DetailProductUser";
-
+import UserLogin from './pages/user/Login';
+import UserRegister from './pages/user/Register';
+import AboutUs from './pages/user/About';
+import ForgotPassword from "./pages/user/component/ForgotPassword";
+import ResetPasswordUser from "./pages/user/ResetPassword";
+import { GET_USER_DATA } from './redux/actions/types'
 
 function App() {
-  // const API_URL = process.env.REACT_APP_API_URL
+  const API_URL = process.env.REACT_APP_API_URL
   const loading = useSelector((state) => state.loading.loading)
-  // console.log(`loading at MainApp:`, loading);
   const dispatch = useDispatch()
+  const tokenUser = localStorage.getItem("token")
   const token = localStorage.getItem("tokenAdmin")
-
   useEffect(() => {
-    axios.get('http://localhost:5000/api/admin/keep-login',
+    axios.get(API_URL + 'admin/keep-login',
       { headers: { "authToken": token } })
       .then((resp) => {
         console.log(`respond when keep login:`, resp.data);
         dispatch({ type: GET_ADMIN_DATA, payload: resp.data })
+      })
+      .catch((err) => {
+        console.log(`error when keep login:`, err);
+      })
+      
+      axios.get(API_URL + 'users/keep-login',
+      { headers: { "Authorization": tokenUser } })
+      .then((resp) => {
+        console.log(`respond when keep login:`, resp.data);
+        dispatch({ type: GET_USER_DATA, payload: resp.data })
       })
       .catch((err) => {
         console.log(`error when keep login:`, err);
@@ -42,6 +56,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/register" element={<UserRegister />}/>
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
+        <Route path="/reset-password/:email" element={<ResetPasswordUser/>}/>
+        <Route path="/login" element={<UserLogin/>}/>
+        <Route path="/about" element={<AboutUs/>}/>
         <Route path="/detail-product/:id" element={<DetailProductUser />} />
         <Route path="/admin" element={<HomeAdmin />} />
         <Route path="/admin/login" element={<Login />} />

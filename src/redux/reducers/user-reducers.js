@@ -1,23 +1,18 @@
-import { GET_USER_DATA } from "../actions/types";
+import {GET_USER_DATA, GET_ERROR_USER} from '../actions/types'
 
 const INITIAL_STATE = {
-  username: "",
-  fullname: "",
-  email: "",
-};
+    data: [],
+    count: 0,
+    error: []
+}
 
-export default function adminReducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case GET_USER_DATA:
-      return {
-        ...state,
-        username: action.payload.username,
-        fullname: action.payload.fullname,
-        email: action.payload.email,
-      };
-    case DELETE_USER_DATA:
-      return INITIAL_STATE;
-    default:
-      return state;
-  }
+export default function userReducer (state = INITIAL_STATE, action) {
+    switch (action.type) {
+        case GET_USER_DATA :
+            return {...state, data : action.payload.data, count: action.payload.count, error: action.payload.error}
+        case GET_ERROR_USER :
+            return {...state, error: action.payload.error}
+        default :
+            return state
+    }
 }

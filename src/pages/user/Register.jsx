@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import Loading from '../../component/subcomponent/Loading';
 
-const API_URL = process.env.REACT_API_URL
+const API_URL = process.env.REACT_APP_API_URL
 
 export default function Register() {
   const [loading, setLoading] = useState(false)
@@ -47,17 +47,17 @@ export default function Register() {
       username: values.username,
       fullname: values.fullname,
       email: values.email,
-      password: values.password
+      password: values.password,
+      re_password: values.re_password
     };
     console.log(`body:`, bodyOnRegister)
     console.log(`api url:`, API_URL)
 
     setLoading(true)
-    await Axios.post(API_URL + '/users/register', bodyOnRegister)
+    await Axios.post(API_URL + '/register', bodyOnRegister)
       .then((resp) => {
         console.log(resp)
-        const arr = resp.data.token.split(" ")
-        const token = arr[1]
+        const token = resp.data.token
         localStorage.setItem("token", token)
 
         setLoading(false)
@@ -68,7 +68,19 @@ export default function Register() {
           duration: 3000,
           isClosable: true,
         })
-        navigate(`/login`)
+        navigate(`/verification`)
+      })
+      .catch((err) => {
+        console.log(`error register:`, err);
+        if (err){
+          return toast({
+            title: `Error`,
+            description: err.response.data.data,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          })
+        }
       })
   }
 

@@ -24,7 +24,7 @@ function ModalDelete(props) {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader fontSize="lg" fontWeight="bold">
-            {props.state.title}
+            Delete Confirmation
           </ModalHeader>
           <ModalCloseButton onClick={props.state.onBtnCancel} />
 

@@ -47,9 +47,9 @@ export default function UserLogin() {
     console.log(`api url:`, API_URL)
 
     dispatch({ type: LOADING_START })
-    await Axios.post(API_URL + '/users', bodyOnSignIn)
+    await Axios.post(API_URL + '/login', bodyOnSignIn)
       .then((resp) => {
-        console.log(resp)
+        console.log(resp.data)
         const token = resp.data.token
         localStorage.setItem("token", token)
         if (!keepLogin[0].checked) {
@@ -57,7 +57,7 @@ export default function UserLogin() {
         } else {
           localStorage.setItem("keepLogin", 'true')
         }
-
+        
         dispatch({ type: LOADING_END })
         toast({
           title: "Login Success",
@@ -66,7 +66,13 @@ export default function UserLogin() {
           duration: 3000,
           isClosable: true,
         })
-        navigate(`/`)
+        if (resp.data.is_verified == "verified") {
+          navigate(`/`)
+        }
+        // else {
+        //   navigate(`/verification`)
+        // }
+
       })
       .catch((err) => {
         dispatch({ type: LOADING_END })

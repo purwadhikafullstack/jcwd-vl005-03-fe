@@ -88,34 +88,34 @@
 /*--------------------------------------------------------------
 # Page Title
 --------------------------------------------------------------*/
-.pagetitlenice {
+.pagetitle {
   margin-bottom: 10px;
 }
-.pagetitlenice h1 {
-  font-size: 24px;
+.pagetitle h1 {
+  font-size: 16px;
   margin-bottom: 0;
   font-weight: 600;
   color: #012970;
 }
 
 /* Breadcrumbs */
-.breadcrumbnice {
+.breadcrumb {
   font-size: 14px;
   font-family: "Nunito", sans-serif;
   color: #899bbd;
   font-weight: 600;
 }
-.breadcrumbnice a {
+.breadcrumb a {
   color: #899bbd;
   transition: 0.3s;
 }
-.breadcrumbnice a:hover {
+.breadcrumb a:hover {
   color: #51678f;
 }
-.breadcrumbnice .breadcrumbnice-item::before {
+.breadcrumb .breadcrumb-item::before {
   color: #899bbd;
 }
-.breadcrumbnice .active {
+.breadcrumb .active {
   color: #51678f;
   font-weight: 600;
 }
@@ -4977,11 +4977,11 @@ fieldset:disabled .btn {
   --bs-accordion-btn-padding-y: 1rem;
   --bs-accordion-btn-color: var(--bs-body-color);
   --bs-accordion-btn-bg: var(--bs-accordion-bg);
-  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='var%28--bs-body-color%29'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='var%28--bs-body-color%29'%3e%3cpath fillRule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
   --bs-accordion-btn-icon-width: 1.25rem;
   --bs-accordion-btn-icon-transform: rotate(-180deg);
   --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
-  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fillRule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
   --bs-accordion-btn-focus-border-color: #86b7fe;
   --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
   --bs-accordion-body-padding-x: 1.25rem;
@@ -13214,15 +13214,14 @@ button.close:focus {
 
 .app-nav .nav-icon {
   position: absolute;
-  left: 1.25rem;
+  left: 1.3rem;
   top: .9rem
 }
 
 .app-nav .nav-icon .bi {
-  width: 1rem;
-  height: 1rem
+  width: 1.3rem;
+  height: 1.3rem
 }
-
 
 .app-nav .submenu-arrow {
   position: absolute;
@@ -13440,7 +13439,7 @@ button.close:focus {
 }
 
 .app-card-stat .stats-figure {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #252930
 }
 
@@ -14027,7 +14026,7 @@ button.close:focus {
 }
 
 .avatar-text {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 400;
   margin-right: 10px;
 }

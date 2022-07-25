@@ -1,10 +1,9 @@
 import * as React from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux"
-import { LOADING_END, LOADING_START } from "../../redux/actions/types";
-
-
+import { useDispatch, useSelector } from 'react-redux'
+import Loading from "../../component/subcomponent/Loading";
+import { LOADING_END, LOADING_START, GET_ACCESS } from "../../redux/actions/types";
 import {
   Box,
   Text,
@@ -26,12 +25,12 @@ import logo from '../../assets/images/clooth-logo.png'
 //components
 import ForgotPassword from "../../component/forgot-password";
 
-const API_URL = process.env.REACT_API_URL
-
 export default function Login() {
+  const API_URL = process.env.REACT_APP_API_URL
   const [forgotOpen, setForgotOpen] = React.useState(false);
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { loading } = useSelector(state => state.loading)
   const toast = useToast()
 
   const [values, setValues] = React.useState({
@@ -54,25 +53,29 @@ export default function Login() {
   const keep = document.getElementsByName("keep")
 
   const onButtonSignIn = async () => {
+    dispatch({ type: LOADING_START })
     const bodyOnSignIn = {
       adminname: values.email,
       password: values.password
     }
-    console.log(`body:`, bodyOnSignIn)
-    console.log(`api url:`, API_URL);
 
-    dispatch({ type: LOADING_START })
-    await Axios.post('http://localhost:5000/api/admin/login', bodyOnSignIn)
+    await Axios.post(API_URL + '/admin/login', bodyOnSignIn)
       .then((resp) => {
+        console.log(resp);
         const arr = resp.headers["authtoken"].split(" ")
         const token = arr[1]
+        console.log(token)
+        const role = arr[0]
+
         localStorage.setItem("tokenAdmin", token)
+        localStorage.setItem("akses", role)
         if (!keep[0].checked) {
           localStorage.setItem("keepLogin", 'false')
         } else {
           localStorage.setItem("keepLogin", 'true')
         }
 
+        dispatch({ type: GET_ACCESS, payload: { role: role } })
         dispatch({ type: LOADING_END })
         toast({
           title: "Login Success",
@@ -97,7 +100,6 @@ export default function Login() {
           })
         }
       })
-
   };
 
   const onForgotButton = () => {
@@ -110,6 +112,7 @@ export default function Login() {
 
   return (
     <Box display={"flex"} mt="-8">
+      <Loading state={{ loading }} />
       <Box height={"100vh"} width={"74%"} ml="-40px">
         <img src={bgLogin} alt={"background"} />
       </Box>
@@ -132,7 +135,8 @@ export default function Login() {
             fontFamily={"sans-serif"}
             fontWeight={"bold"}
             textColor={"yellow.500"}
-          >ADMIN LOG IN</Text>
+          >ADMIN LOG IN
+          </Text>
           <Box p="10px">
             <Input
               label="Email"
@@ -152,7 +156,6 @@ export default function Login() {
                 border={"1.5px solid"}
                 borderColor="blackAlpha.400"
                 onChange={handleChange('password')}
-
               />
               <InputRightElement width='4.5rem'>
                 <Button h='1.75rem' size='sm' onClick={handleClick} variant="text">
@@ -193,6 +196,5 @@ export default function Login() {
         </ScaleFade>
       </Box>
     </Box>
-
   )
 }

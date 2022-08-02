@@ -38,6 +38,7 @@ export default function ForgotPassword() {
     console.log(`api url:`, API_URL);
 
     setLoading(true)
+    
     await Axios.post(API_URL + '/forgotPassword', bodyOnForgotPassword)
       .then((resp) => {
         setLoading(false)

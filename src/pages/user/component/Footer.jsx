@@ -1,4 +1,6 @@
 import React from "react";
+import { Icon, HStack } from "@chakra-ui/react"
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaBehance } from "react-icons/fa"
 
 function Footer() {
   return (
@@ -47,12 +49,12 @@ function Footer() {
               <p>Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved.
 
                 <br />Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a></p>
-              <ul>
-                <li><a href="#"><i className="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i className="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i className="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i className="fa fa-behance"></i></a></li>
-              </ul>
+              <HStack spacing={5} pt={5} alignItems='center' justifyContent='center'>
+                <Icon as={FaFacebookF} w={6} h={6} color='cyan.100'/>
+                <Icon as={FaTwitter} w={6} h={6} color='cyan.100' />
+                <Icon as={FaLinkedinIn} w={6} h={6} color='cyan.100' />
+                <Icon as={FaBehance} w={7} h={7} color='cyan.100' />
+              </HStack>
             </div>
           </div>
         </div>

@@ -4,6 +4,8 @@ import {
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
   Checkbox,
   Stack,
   Link,
@@ -15,9 +17,11 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import Axios from 'axios';
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux'
-import { LOADING_END, LOADING_START } from '../../redux/actions/types';
+import { LOADING_END, LOADING_START, GET_USER_DATA } from '../../redux/actions/types';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -26,6 +30,7 @@ export default function UserLogin() {
   const dispatch = useDispatch()
   const toast = useToast()
 
+  const [showPassword, setShowPassword] = useState(false)
   const [values, setValues] = React.useState({
     email: '',
     password: '',
@@ -38,7 +43,7 @@ export default function UserLogin() {
 
   const keepLogin = document.getElementsByName("keep")
 
-  const onBtnLogin = async () => {
+  const onButtonLogin = async () => {
     const bodyOnSignIn = {
       login: values.email,
       password: values.password
@@ -52,12 +57,13 @@ export default function UserLogin() {
         console.log(resp.data)
         const token = resp.data.token
         localStorage.setItem("token", token)
+        localStorage.setItem('email', values.email)
         if (!keepLogin[0].checked) {
           localStorage.setItem("keepLogin", 'false')
         } else {
           localStorage.setItem("keepLogin", 'true')
         }
-        
+
         dispatch({ type: LOADING_END })
         toast({
           title: "Login Success",
@@ -66,7 +72,7 @@ export default function UserLogin() {
           duration: 3000,
           isClosable: true,
         })
-        if (resp.data.is_verified == "verified") {
+        if (resp.data.is_verified === "verified" || "unverified" ) {
           navigate(`/`)
         }
         // else {
@@ -115,7 +121,18 @@ export default function UserLogin() {
             </FormControl>
             <FormControl isRequired id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" onChange={handleChange('password')} />
+              <InputGroup>
+                  <Input type={showPassword ? 'text' : 'password'} onChange={handleChange('password')} />
+                  <InputRightElement h={'full'}>
+                    <Button
+                      variant={'ghost'}
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }>
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
             </FormControl>
             <Stack spacing={10}>
               <Stack
@@ -126,7 +143,7 @@ export default function UserLogin() {
                 <Link href='/forgot-password' color={'blue.400'}>Forgot password?</Link>
               </Stack>
               <Button
-                onClick={onBtnLogin}
+                onClick={onButtonLogin}
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{

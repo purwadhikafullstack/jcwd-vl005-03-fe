@@ -13,18 +13,17 @@ import {
   useColorModeValue,
   Link,
   useToast,
+  FormHelperText,
 } from '@chakra-ui/react';
 import Axios from 'axios';
 import * as React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import Loading from '../../component/subcomponent/Loading';
 
 const API_URL = process.env.REACT_APP_API_URL
 
 export default function Register() {
-  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const toast = useToast()
 
@@ -53,14 +52,12 @@ export default function Register() {
     console.log(`body:`, bodyOnRegister)
     console.log(`api url:`, API_URL)
 
-    setLoading(true)
     await Axios.post(API_URL + '/register', bodyOnRegister)
       .then((resp) => {
         console.log(resp)
         const token = resp.data.token
         localStorage.setItem("token", token)
 
-        setLoading(false)
         toast({
           title: "Register Success",
           description: "Register Success",
@@ -86,7 +83,6 @@ export default function Register() {
 
   return (
     <>
-      <Loading state={{ loading }} />
       <Flex
         minH={'100vh'}
         align={'center'}
@@ -134,6 +130,7 @@ export default function Register() {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
+                <FormHelperText>Password must include more than 8 Characters, At least one capital letter, At least one number, At least one special character</FormHelperText>
               </FormControl>
               <FormControl id="re_password" isRequired>
                 <FormLabel>Repeat Password</FormLabel>

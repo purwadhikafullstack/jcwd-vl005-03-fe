@@ -11,14 +11,11 @@ import {
 } from '@chakra-ui/react';
 import React from 'react'
 import Axios from "axios"
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../../../component/subcomponent/Loading';
 
 const API_URL = process.env.REACT_APP_API_URL
 
 export default function ForgotPassword() {
-  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const toast = useToast()
 
@@ -36,12 +33,10 @@ export default function ForgotPassword() {
     }
     console.log(`body:`, bodyOnForgotPassword)
     console.log(`api url:`, API_URL);
-
-    setLoading(true)
     
     await Axios.post(API_URL + '/forgotPassword', bodyOnForgotPassword)
       .then((resp) => {
-        setLoading(false)
+        console.log(`Respond:`, resp)
         toast({
           title: "Forgot Password Success",
           description: "Check your email",
@@ -53,12 +48,11 @@ export default function ForgotPassword() {
         navigate('/')
       })
       .catch((err) => {
-        setLoading(false)
         console.log(`error:`, err);
         if (err) {
           return toast({
             title: `Error`,
-            description: err.response.data.data,
+            description: err.response.data,
             status: 'error',
             duration: 5000,
             isClosable: true,
@@ -69,7 +63,6 @@ export default function ForgotPassword() {
 
   return (
     <>
-      <Loading state={{ loading }} />
       <Flex
         minH={'100vh'}
         align={'center'}

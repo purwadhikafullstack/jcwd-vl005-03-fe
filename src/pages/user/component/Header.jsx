@@ -1,14 +1,23 @@
 import React from "react";
 import { BsCart } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import logo from '../../../assets/images/clooth-logo.png'
-import { Stack, Button } from '@chakra-ui/react'
+import { Stack, Button, Text, Center } from '@chakra-ui/react'
 
 function Header() {
+  const navigate = useNavigate
   const { count } = useSelector(state => state.cart)
-
   console.log(count)
+
+  const onButtonLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('email')
+    localStorage.removeItem('keepLogin')
+    navigate(`/login`)
+  }
+
+  const user = useSelector((state) => state.user)
 
   return (
     <header className="header-area header-sticky ">
@@ -47,6 +56,12 @@ function Header() {
                   </Link>
                   <Link to={"/login"}>
                     <Button colorScheme='gray'>Login</Button>
+                  </Link>
+                  <Center>
+                    <Text fontSize='xl' fontWeight='medium'>Welcome, AtlanticNova</Text>
+                  </Center>
+                  <Link to={'/'} onClick={onButtonLogout}>
+                    <Button colorScheme='gray'>Logout</Button>
                   </Link>
                 </Stack>
               </ul>

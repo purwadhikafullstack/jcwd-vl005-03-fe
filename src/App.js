@@ -33,6 +33,7 @@ function App() {
   const API_URL = process.env.REACT_APP_API_URL
   const dispatch = useDispatch()
   const token = localStorage.getItem("tokenAdmin")
+  const userToken = localStorage.getItem('token')
 
   useEffect(() => {
     dispatch({ type: LOADING_START })
@@ -46,7 +47,7 @@ function App() {
         console.log(`error when keep login:`, err);
       })
 
-    axios.get(API_URL + '/user', { headers: { "authorization": token } })
+    axios.get(API_URL + '/keepLogin', { headers: { "token": userToken } })
       .then((resp) => {
         dispatch({ type: LOADING_END })
         dispatch({ type: GET_USER_DATA, payload: resp.data })

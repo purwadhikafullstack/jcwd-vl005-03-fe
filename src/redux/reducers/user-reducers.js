@@ -3,7 +3,7 @@ import {GET_USER_DATA, GET_ERROR_USER} from '../actions/types'
 const INITIAL_STATE = {
     data: [],
     count: 0,
-    error: []
+    error: [],
 }
 
 export default function userReducer (state = INITIAL_STATE, action) {

@@ -62,8 +62,8 @@ export default function Verification() {
           isClosable: true
         })
         console.log(`isVerified:`, resp.data.is_verified)
-        if (resp.data.is_verified == "verified") {
-          isVerified = true
+        if (resp.data.is_verified === "verified") {
+          return isVerified = true
         } else {
           return isVerified
         }

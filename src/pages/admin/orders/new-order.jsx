@@ -90,7 +90,7 @@ export default function NewOrder() {
   useEffect(() => {
     dispatch(getNewOrders(token, sort, order, page, limit))
     if (role !== 'BearerAdmin' || role === null) {
-      return (navigate('/user/login'))
+      return (navigate('/login'))
     }
   }, [page])
 
@@ -156,10 +156,7 @@ export default function NewOrder() {
     )
   }
 
-  if (role !== 'BearerAdmin' || role === null) {
-    return (navigate('/login'))
-  }
-
+  
   return (
     <>
       <Header />

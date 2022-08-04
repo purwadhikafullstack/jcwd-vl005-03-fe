@@ -89,7 +89,7 @@ export default function ManageUsers() {
   useEffect(() => {
     dispatch(getUsersData(token, sort, order, page, limit))
     if (role !== 'BearerAdmin' || role === null) {
-      return (navigate('/user/login'))
+      return (navigate('/login'))
     }
   }, [page])
 
@@ -185,6 +185,9 @@ export default function ManageUsers() {
     setTimeout(() => localStorage.removeItem("tokenAdmin"), 10000)
     dispatch({ type: LOADING_END })
   }
+  if (role !== 'BearerAdmin' || role === null) {
+    return (navigate('/login'))
+  }
   else if (token === null) {
     setTimeout(() => navigate('/admin/login'), 5000)
     return (
@@ -195,16 +198,13 @@ export default function ManageUsers() {
   }
 
 
-  if (role !== 'BearerAdmin' || role === null) {
-    return (navigate('/login'))
-  }
-
+ 
 
   return (
     <>
       <Header />
       <Loading state={{ loading }} />
-      <Box>
+      <Box mt={"60px"}>
         <Flex>
           <Confirmation
             state={{ confirm, onBtnNo, onBtnYes, onBtnClose }}

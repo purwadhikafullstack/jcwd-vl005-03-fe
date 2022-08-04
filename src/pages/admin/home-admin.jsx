@@ -37,18 +37,19 @@ export default function HomeAdmin() {
     setTimeout(() => localStorage.removeItem("tokenAdmin"), 10000)
     dispatch({ type: LOADING_END })
   }
-  else if (token === null) {
-    navigate('/admin/login')
-    // return (
-    //   <Box ml="100px" mt="50px" fontSize={"6xl"} fontWeight="extrabold">
-    //     <h1>You have to Log In first.</h1>
-    //   </Box>
-    // )
-  }
-
   if (role !== 'BearerAdmin' || role === null) {
     return (navigate('/login'))
   }
+  else if (token === null) {
+    navigate('/admin/login')
+    return (
+      <Box ml="100px" mt="50px" fontSize={"6xl"} fontWeight="extrabold">
+        <h1>You have to Log In first.</h1>
+      </Box>
+    )
+  }
+
+  
 
   return (
     <>

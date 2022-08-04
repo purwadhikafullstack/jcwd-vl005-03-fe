@@ -204,6 +204,9 @@ function FormProduct(props) {
     setTimeout(() => localStorage.removeItem("tokenAdmin"), 10000)
     dispatch({ type: LOADING_END })
   }
+  if (role !== 'BearerAdmin' || role === null) {
+    return (navigate('/login'))
+  }
   else if (token === null) {
     setTimeout(() => navigate('/admin/login'), 5000)
     return (
@@ -213,9 +216,7 @@ function FormProduct(props) {
     )
   }
 
-  if (role !== 'BearerAdmin' || role === null) {
-    return (navigate('/login'))
-  }
+ 
 
   return (
     <Box w={"100%"}>

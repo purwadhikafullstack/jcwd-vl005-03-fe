@@ -168,6 +168,10 @@ function Product() {
     setTimeout(() => localStorage.removeItem("tokenAdmin"), 10000)
     dispatch({ type: LOADING_END })
   }
+  if (role !== 'BearerAdmin' || role === null) {
+    return (navigate('/login'))
+  }
+
   else if (token === null) {
     setTimeout(() => navigate('/admin/login'), 5000)
     return (
@@ -177,10 +181,7 @@ function Product() {
     )
   }
 
-  if (role !== 'BearerAdmin' || role === null) {
-    return (navigate('/login'))
-  }
-
+ 
   return (
     <>
       <Header />

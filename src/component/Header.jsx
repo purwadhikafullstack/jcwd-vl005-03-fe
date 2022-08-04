@@ -37,7 +37,7 @@ function Header() {
                 </div>
                 <div className="app-utilities col-auto">
                   <div className="app-utility-item app-user-dropdown dropdown d-flex align-items-center">
-                    <Text className="avatar-text">Welcome {admin.fullname}</Text>
+                    <Text className="avatar-text">Welcome {admin.adminname}</Text>
                     <img className="mr-3" src="/assets/images/user.png" alt="user profile" />
                     <a className="dropdown-toggle px-2" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                       aria-expanded="false">

@@ -34,10 +34,6 @@ export default function AddAdmin() {
   });
 
 
-  // if (role !== 'BearerAdmin' || role === null) {
-  //   return (navigate('/user/login'))
-  // }
-
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -92,6 +88,9 @@ export default function AddAdmin() {
     setTimeout(() => localStorage.removeItem("tokenAdmin"), 10000)
     dispatch({ type: LOADING_END })
   }
+  if (role !== 'BearerAdmin' || role === null) {
+    return (navigate('/login'))
+  }
   else if (token === null) {
     setTimeout(() => navigate('/admin/login'), 5000)
     return (
@@ -101,9 +100,7 @@ export default function AddAdmin() {
     )
   }
 
-  if (role !== 'BearerAdmin' || role === null) {
-    return (navigate('/login'))
-  }
+  
 
   return (
     <>

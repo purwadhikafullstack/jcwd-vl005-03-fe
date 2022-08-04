@@ -64,7 +64,7 @@ export default function AllOrders() {
   useEffect(() => {
     dispatch(getAllOrders(token, sort, order, page, limit))
     if (role !== 'BearerAdmin' || role === null) {
-      return (navigate('/user/login'))
+      return (navigate('/login'))
     }
   }, [page])
 
@@ -125,9 +125,6 @@ export default function AllOrders() {
     )
   }
 
-  if (role !== 'BearerAdmin' || role === null) {
-    return (navigate('/login'))
-  }
 
   return (
     <>

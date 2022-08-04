@@ -47,15 +47,15 @@ function App() {
         console.log(`error when keep login:`, err);
       })
 
-    axios.get(API_URL + '/keepLogin', { headers: { "token": userToken } })
-      .then((resp) => {
-        dispatch({ type: LOADING_END })
-        dispatch({ type: GET_USER_DATA, payload: resp.data })
-      })
-      .catch((err) => {
-        dispatch({ type: LOADING_END })
-        console.log(`error when keep login:`, err);
-      })
+    // axios.get(API_URL + '/keepLogin', { headers: { "token": userToken } })
+    //   .then((resp) => {
+    //     dispatch({ type: LOADING_END })
+    //     dispatch({ type: GET_USER_DATA, payload: resp.data })
+    //   })
+    //   .catch((err) => {
+    //     dispatch({ type: LOADING_END })
+    //     console.log(`error when keep login:`, err);
+    //   })
   }, [0])
 
   return (

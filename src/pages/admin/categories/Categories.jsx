@@ -195,8 +195,11 @@ function Categories() {
     setTimeout(() => localStorage.removeItem("tokenAdmin"), 10000)
     dispatch({ type: LOADING_END })
   }
+  if (role !== 'BearerAdmin' || role === null) {
+    return (navigate('/login'))
+  }
   else if (token === null) {
-    setTimeout(() => navigate('/admin/login'), 5000)
+    setTimeout(() => navigate('/login'), 5000)
     return (
       <Box ml="100px" mt="50px" fontSize={"6xl"} fontWeight="extrabold">
         <h1>You have to Log In first.</h1>
@@ -204,9 +207,7 @@ function Categories() {
     )
   }
 
-  if (role !== 'BearerAdmin' || role === null) {
-    return (navigate('/login'))
-  }
+  
 
   return (
     <>
